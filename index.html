@@ -104,13 +104,14 @@
     background:linear-gradient(100deg, rgba(0,26,77,0.78) 0%, rgba(0,26,77,0.45) 45%, rgba(0,26,77,0.15) 75%);
   }
   .hero-chat-badge{
-    position:absolute; z-index:4;
-    right:calc(8.9% - 32px); bottom:calc(6.5% - 32px);
-    width:64px; height:64px; border-radius:50%;
-    box-shadow:0 6px 18px rgba(0,0,0,0.35);
+    position:absolute; z-index:4; left:0; top:0;
+    width:96px; height:96px; border-radius:50%;
+    box-shadow:0 6px 18px rgba(0,0,0,0.4);
+    transform:translate(-50%,-50%);
+    opacity:0; transition:opacity .2s;
   }
   @media (max-width:700px){
-    .hero-chat-badge{ width:48px; height:48px; right:calc(8.9% - 24px); bottom:calc(6.5% - 24px); }
+    .hero-chat-badge{ width:68px; height:68px; }
   }
   .hero-copy{
     position:relative; z-index:2; padding: 0 60px; max-width:640px;
@@ -1268,6 +1269,33 @@ document.addEventListener('click', function(e){
     dd.classList.remove('open');
   }
 });
+
+function positionHeroBadge(){
+  var video = document.querySelector('.hero-bg-video');
+  var badge = document.querySelector('.hero-chat-badge');
+  var hero = document.querySelector('.hero');
+  if(!video || !badge || !hero || !video.videoWidth) return;
+  var vw = video.videoWidth, vh = video.videoHeight;
+  var cw = hero.clientWidth, ch = hero.clientHeight;
+  var scale = Math.max(cw/vw, ch/vh);
+  var offsetX = (vw*scale - cw)/2;
+  var offsetY = (vh*scale - ch)/2;
+  var srcX = 1268, srcY = 656; // posicion del destello de marca de agua en el video fuente (1400x788)
+  badge.style.left = (srcX*scale - offsetX) + 'px';
+  badge.style.top = (srcY*scale - offsetY) + 'px';
+  badge.style.opacity = '1';
+}
+(function(){
+  var v = document.querySelector('.hero-bg-video');
+  if(v){
+    if(v.readyState >= 1){ positionHeroBadge(); }
+    v.addEventListener('loadedmetadata', positionHeroBadge);
+  }
+  window.addEventListener('resize', positionHeroBadge);
+  window.addEventListener('load', positionHeroBadge);
+  setTimeout(positionHeroBadge, 300);
+  setTimeout(positionHeroBadge, 1000);
+})();
 </script>
 
 <script src="man-cart.js"></script>
