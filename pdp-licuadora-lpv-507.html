@@ -68,6 +68,32 @@
     position:absolute; top:2px; right:2px; background:var(--azul); color:white; font-size:9px; font-weight:700;
     width:15px; height:15px; border-radius:50%; display:flex; align-items:center; justify-content:center;
   }
+  .mobile-menu-btn{display:none;}
+  @media (max-width:980px){
+    .nav-links{display:none;}
+    .btn-dist-light{display:none;}
+    .mobile-menu-btn{display:flex;}
+  }
+  .mobile-nav-overlay{position:fixed; inset:0; z-index:250; display:none;}
+  .mobile-nav-overlay.open{display:block;}
+  .mobile-nav-backdrop{position:absolute; inset:0; background:rgba(0,0,0,0.35);}
+  .mobile-nav-panel{
+    position:absolute; top:0; left:0; height:100%; width:82vw; max-width:340px; background:white;
+    box-shadow:4px 0 24px rgba(0,0,0,0.18); overflow-y:auto; padding:22px 20px 24px 20px;
+    display:flex; flex-direction:column;
+  }
+  .mobile-nav-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;}
+  .mobile-nav-header span{font-family:var(--font-d); font-weight:700; font-size:16px; color:var(--negro);}
+  .mobile-nav-links{display:flex; flex-direction:column;}
+  .mobile-nav-links a{
+    display:block; padding:15px 2px; font-family:var(--font-d); font-size:18px; font-weight:600;
+    color:var(--negro); border-bottom:1px solid var(--gris-linea); text-decoration:none;
+  }
+  .mobile-nav-links a:last-child{border-bottom:none;}
+  .mobile-nav-foot{margin-top:auto; padding-top:20px; border-top:1px solid var(--gris-linea);}
+  .mobile-nav-foot a{
+    display:block; font-family:var(--font-d); color:var(--azul); font-weight:700; text-decoration:none; font-size:15px;
+  }
   .btn-dist-light{
     font-family:var(--font-d); font-size:13.5px; font-weight:600; color:var(--negro);
     border-bottom:1px solid var(--negro); padding-bottom:2px;
@@ -589,6 +615,9 @@ footer{background:#003fa2; color:rgba(255,255,255,0.7); padding-top:40px; font-s
     </div>
   </div>
     <a href="distribuidor.html" class="btn-dist-light">Soy distribuidor</a>
+    <div class="icon-btn mobile-menu-btn" title="Menú" id="mobileMenuTrigger" onclick="openMobileNav()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </div>
   </div>
 </header>
 
@@ -616,6 +645,27 @@ footer{background:#003fa2; color:rgba(255,255,255,0.7); padding-top:40px; font-s
     </div>
   </div>
 </div>
+
+<div class="mobile-nav-overlay" id="mobileNavOverlay">
+  <div class="mobile-nav-backdrop" onclick="closeMobileNav()"></div>
+  <div class="mobile-nav-panel">
+    <div class="mobile-nav-header">
+      <span>Categorías</span>
+      <button class="search-close" onclick="closeMobileNav()" title="Cerrar">✕</button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="catalogo-ventiladores.html">Ventiladores</a>
+      <a href="catalogo-licuadoras.html">Licuadoras</a>
+      <a href="catalogo-ollas.html">Ollas de presión</a>
+      <a href="catalogo-refacciones.html">Refacciones</a>
+      <a href="garantia-servicio.html">Garantía</a>
+    </nav>
+    <div class="mobile-nav-foot">
+      <a href="distribuidor.html">Soy distribuidor →</a>
+    </div>
+  </div>
+</div>
+
 
 <div class="pdp-sticky-bar" id="pdpStickyBar">
   <div class="wrap pdp-sticky-inner">
@@ -997,6 +1047,14 @@ footer{background:#003fa2; color:rgba(255,255,255,0.7); padding-top:40px; font-s
 <script>
 const MAN_SEARCH_INDEX = [{"name": "Circulador Freal 2020", "price": "$1,573.00", "href": "pdp-circulador-freal-2020.html", "cat": "Ventiladores", "type": "producto"}, {"name": "Ventilador Pedestal VPG-0018", "price": "$1,890", "href": "pdp-ventilador-vpg-0018.html", "cat": "Ventiladores", "type": "producto"}, {"name": "Ventilador MiniFreal 0013", "price": "$649", "href": "pdp-ventilador-minifreal-0013.html", "cat": "Ventiladores", "type": "producto"}, {"name": "Ventilador de Pared M Blu 1116", "price": "$1,190", "href": "pdp-ventilador-miblu-1116.html", "cat": "Ventiladores", "type": "producto"}, {"name": "Ventilador Pedestal VPG-9016", "price": "$1,590", "href": "pdp-ventilador-vpg-9016.html", "cat": "Ventiladores", "type": "producto"}, {"name": "Ventilador Pedestal Smart M Blu 0018", "price": "$2,290", "href": "pdp-ventilador-smart-miblu-0018.html", "cat": "Ventiladores", "type": "producto"}, {"name": "Licuadora LMV-9090", "price": "$1,160.00", "href": "pdp-licuadora-lmv-9090.html", "cat": "Licuadoras", "type": "producto"}, {"name": "Licuadora LPV-807 Silver", "price": "$1,084.60", "href": "pdp-licuadora-lpv-807-silver.html", "cat": "Licuadoras", "type": "producto"}, {"name": "Licuadora LPP-510", "price": "$1,052.70", "href": "pdp-licuadora-lpp-510.html", "cat": "Licuadoras", "type": "producto"}, {"name": "Licuadora LMV-2025", "price": "$1,648.90", "href": "pdp-licuadora-lmv-2025.html", "cat": "Licuadoras", "type": "producto"}, {"name": "Olla de Presión OP-3007", "price": "$2,662.55", "href": "pdp-olla-op-3007.html", "cat": "Ollas de presión", "type": "producto"}, {"name": "Cuchillas de Acero Inoxidable", "price": "$149", "href": "pdp-refaccion-cuchillas.html", "cat": "Refacciones", "type": "producto"}, {"name": "Aspa Ventilador 18\"", "price": "$86.00", "href": "pdp-aspa-ventilador-18.html", "cat": "Refacciones", "type": "producto"}, {"name": "Vaso de Vidrio con Tapa", "price": "$229", "href": "pdp-refaccion-vaso-vidrio.html", "cat": "Refacciones", "type": "producto"}, {"name": "Empaque para Olla de Presión OP-3007", "price": "$89", "href": "pdp-refaccion-empaque-3007.html", "cat": "Refacciones", "type": "producto"}, {"name": "Registro de Vaso Negro", "price": "$59", "href": "pdp-refaccion-registro-negro.html", "cat": "Refacciones", "type": "producto"}, {"name": "Kit Completo para Olla de Presión OP-3007", "price": "$199", "href": "pdp-refaccion-kit-olla.html", "cat": "Refacciones", "type": "producto"}, {"name": "Nosotros — nuestra historia", "href": "nosotros.html", "cat": "Empresa", "type": "pagina"}, {"name": "Contacto", "href": "contacto.html", "cat": "Ayuda", "type": "pagina"}, {"name": "Garantía y servicio", "href": "garantia-servicio.html", "cat": "Ayuda", "type": "pagina"}, {"name": "Preguntas frecuentes", "href": "preguntas-frecuentes.html", "cat": "Ayuda", "type": "pagina"}, {"name": "Soy distribuidor / mayoreo", "href": "distribuidor.html", "cat": "Negocio", "type": "pagina"}, {"name": "Catálogo de ventiladores", "href": "catalogo-ventiladores.html", "cat": "Catálogo", "type": "pagina"}, {"name": "Catálogo de licuadoras", "href": "catalogo-licuadoras.html", "cat": "Catálogo", "type": "pagina"}, {"name": "Catálogo de ollas de presión", "href": "catalogo-ollas.html", "cat": "Catálogo", "type": "pagina"}, {"name": "Catálogo de refacciones", "href": "catalogo-refacciones.html", "cat": "Catálogo", "type": "pagina"}, {"name": "Licuadora Profesional Master Blender LPP-9022", "price": "$2,630.00", "href": "pdp-licuadora-lpp-9022.html", "cat": "Licuadoras", "type": "producto"}, {"name": "Licuadora Profesional PowerBlend LPP-9025", "price": "$2,552.00", "href": "pdp-licuadora-lpp-9025.html", "cat": "Licuadoras", "type": "producto"}, {"name": "Licuadora LMV-202", "price": "$1,545.50", "href": "pdp-licuadora-lmv-202.html", "cat": "Licuadoras", "type": "producto"}, {"name": "Licuadora LPP-1010", "price": "$925.10", "href": "pdp-licuadora-lpp-1010.html", "cat": "Licuadoras", "type": "producto"}, {"name": "Licuadora LPP-504", "price": "$1,001.00", "href": "pdp-licuadora-lpp-504.html", "cat": "Licuadoras", "type": "producto"}, {"name": "Licuadora LPV-507", "price": "$1,147.30", "href": "pdp-licuadora-lpv-507.html", "cat": "Licuadoras", "type": "producto"}, {"name": "Licuadora LPP-507", "price": "$1,084.60", "href": "pdp-licuadora-lpp-507.html", "cat": "Licuadoras", "type": "producto"}, {"name": "Ventilador de Pared VWB-1116", "price": "Precio a consultar", "href": "pdp-ventilador-vwb-1116.html", "cat": "Ventiladores", "type": "producto"}];
 
+function openMobileNav(){
+  document.getElementById('mobileNavOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileNav(){
+  document.getElementById('mobileNavOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
 function openSearch(){
   document.getElementById('searchOverlay').classList.add('open');
   document.getElementById('searchInput').value = '';
